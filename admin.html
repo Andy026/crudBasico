@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+  </head>
+  <body>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">CRUD</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="admin.html">Admin</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  href="index.html">Home</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+      </header>
+      <main class="container">
+        <section>
+        <h1 class="text-center display-2 my-5">Administrar Productos</h1>
+        <h2 class="mb-5">Cargar productos</h2>
+        <article>
+        <form id="formProducto">
+          <div class="mb-3">
+            <label for="codigo" class="form-label"
+              >Código</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="codigo"
+              placeholder="Ingresar un código"
+            />
+            <div class="invalid-feedback">
+              Este campo es obligatorio.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="producto" class="form-label"
+              >Producto</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="producto"
+              placeholder='"Mouse Logitech"'
+            />
+            <div class="invalid-feedback">
+              Este campo es obligatorio.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label"
+              >Descripción</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="descripcion"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="cantidad" class="form-label"
+              >Cantidad</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="cantidad"
+              placeholder="ej: 5"
+            />
+            <div class="invalid-feedback">
+              Este campo es obligatorio y la cantidad de productos deben ser como minimo 1 y máximo 5.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="url" class="form-label"
+              >URL</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="url"
+            />
+          </div>
+          <div class="alert alert-danger d-none" role="alert" id="msjAlerta">
+            Debe completar todos los datos marcados
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          
+        </form>
+      </article>
+      </section>
+      <section>
+        <h2 class="display-3 text-center">Tabla de productos</h2>
+        <hr>
+        <button class="btn btn-primary" id="btnAgregar">Agregar</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Cod</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">URL</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="tablaProductos">
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>

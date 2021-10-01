@@ -1,4 +1,4 @@
-function validarCampoRequerido(input) {
+export function validarCampoRequerido(input) {
   //console.log(input)
   console.log(input.value);
   if (input.value.trim().length > 0 && input.value.trim().length >= 3) {
@@ -12,7 +12,7 @@ function validarCampoRequerido(input) {
   }
 }
 
-function validarNumeros(input) {
+export function validarNumeros(input) {
   //validar con expresiones regulares
   let patron = /^[0-9]{1,5}$/;
   if (patron.test(input.value)) {
@@ -24,7 +24,7 @@ function validarNumeros(input) {
   }
 }
 
-function validarCodigo(input) {
+export function validarCodigo(input) {
   if (input.value.trim() != "" && input.value.trim().length >= 3) {
     input.className = "form-control is-valid";
     return true;
@@ -34,7 +34,7 @@ function validarCodigo(input) {
   }
 }
 
-function validarUrl(input) {
+export function validarUrl(input) {
   let patron = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
   if (
     input.value.trim() != "" &&
@@ -48,8 +48,7 @@ function validarUrl(input) {
   }
 }
 
-function validarGeneral(e) {
-  e.preventDefault();
+export function validarGeneral() {
 
   let alerta = document.querySelector('#msjAlerta');
   
@@ -62,34 +61,10 @@ function validarGeneral(e) {
   ) {
     console.log("validación correcta");
     alerta.className = 'alert alert-danger d-none'
+    return true;
   } else {
     console.log("validación erronea");
     alerta.className = 'alert alert-danger'
+    return false;
   }
 }
-
-let producto = document.querySelector("#producto");
-let cantidad = document.querySelector("#cantidad");
-let codigo = document.querySelector("#codigo");
-let url = document.querySelector("#url");
-let descripcion = document.querySelector("#descripcion");
-let formulario = document.querySelector("#formProducto");
-//console.log(cantidad);
-
-//agregar eventos desde js
-producto.addEventListener("blur", () => {
-  validarCampoRequerido(producto);
-});
-cantidad.addEventListener("blur", () => {
-  validarNumeros(cantidad);
-});
-codigo.addEventListener("blur", () => {
-  validarCampoRequerido(codigo);
-});
-url.addEventListener("blur", () => {
-  validarUrl(url);
-});
-descripcion.addEventListener("blur", () => {
-  validarCampoRequerido(descripcion);
-});
-formulario.addEventListener("submit", validarGeneral);
