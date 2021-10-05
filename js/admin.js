@@ -35,6 +35,7 @@ url.addEventListener("blur", () => {
 });
 formulario.addEventListener("submit", guardarProducto);
 
+//verificar si hay datos en LocalStorage
 cargaInicial();
 
 function guardarProducto(event) {
@@ -62,12 +63,46 @@ function agregarProducto() {
   productos.push(productoNuevo);
   console.log(productos);
   //guardar en localstorage
-  localStorage.setItem('productosKey', JSON.stringify(productos));
+  localStorage.setItem("productosKey", JSON.stringify(productos));
   //limpiar el formulario
+  limpiarFormulario();
   //dibujar fila en la tabla
+  crearFila(productoNuevo);
 }
 
 function cargaInicial() {
-    productos = JSON.parse(localStorage.getItem('productosKey')) || [];
-    console.log(productos);
+  //si hay algo en localstorage lo llamo con getitem y si no hay nada llamamos a un array vacio
+  productos = JSON.parse(localStorage.getItem("productosKey")) || [];
+  //console.log(productos);
+
+  //llamar a la función que crea filas
+  productos.forEach(itemProducto => {
+    crearFila(itemProducto);
+  })
+}
+
+function crearFila(itemProducto) {
+  console.log(itemProducto);
+  //traigo el nodo padre que sería el tbody
+  let tabla = document.querySelector("#tablaProductos");
+  //console.log(tabla);
+  tabla.innerHTML += `<tr>
+  <th scope="row">${itemProducto.codigo}</th>
+  <td>${itemProducto.nombreProducto}</td>
+  <td>${itemProducto.descripcion}</td>
+  <td>${itemProducto.cantidad}</td>
+  <td>${itemProducto.url}</td>
+  <td>
+    <button class="btn btn-warning">Editar</button>
+    <button class="btn btn-danger">Borrar</button>
+  </td>
+</tr>`;
+}
+
+function limpiarFormulario () {
+  //limpia los value de los elementos del form
+  formulario.reset();
+  //limpiar las clases de cada elemento del form
+  codigo.className = 'form-control'
+  //terminar de limpiar los inputs
 }

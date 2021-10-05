@@ -1,3 +1,4 @@
+//helpers.js
 export function validarCampoRequerido(input) {
   //console.log(input)
   console.log(input.value);

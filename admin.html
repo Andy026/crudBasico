@@ -108,31 +108,22 @@
         <h2 class="display-3 text-center">Tabla de productos</h2>
         <hr>
         <button class="btn btn-primary" id="btnAgregar">Agregar</button>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Cod</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">URL</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody class="tablaProductos">
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>
-                <button class="btn btn-warning">Editar</button>
-                <button class="btn btn-danger">Borrar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Cod</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">URL</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaProductos">
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
     <script src="js/bootstrap.min.js"></script>
