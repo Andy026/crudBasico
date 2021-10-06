@@ -43,7 +43,7 @@ function guardarProducto(event) {
   //primero validar datos del form
   if (validarGeneral()) {
     //si esta todo ok crear un nuevo producto
-    console.log("aqui deberia crear un producto");
+    //console.log("aqui deberia crear un producto");
     agregarProducto();
   } else {
     console.log("aqui solo mostrar el cartel de error");
