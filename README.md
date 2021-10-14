@@ -1,6 +1,6 @@
 # Catalogo de productos
 
-*Este pryecto es un catalogo de productos creado con javascript. Se puede realizar un CRUD básico de productos.*
+*Este proyecto es un catalogo de productos creado con javascript. Se puede realizar un CRUD básico de productos.*
 
 [Proyecto catalogo](https://getbootstrap.com/)
 
