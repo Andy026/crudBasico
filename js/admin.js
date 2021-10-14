@@ -36,7 +36,7 @@ url.addEventListener("blur", () => {
   validarUrl(url);
 });
 formulario.addEventListener("submit", guardarProducto);
-btnAgregar.addEventListener('click', limpiarFormulario)
+btnAgregar.addEventListener("click", limpiarFormulario);
 
 //verificar si hay datos en LocalStorage
 cargaInicial();
@@ -77,6 +77,12 @@ function agregarProducto() {
   limpiarFormulario();
   //dibujar fila en la tabla
   crearFila(productoNuevo);
+  //mostrar un mensaje al usuario
+  Swal.fire(
+    "Producto agregado",
+    "El producto fue agregado correctamente",
+    "success"
+  );
 }
 
 function cargaInicial() {
@@ -103,7 +109,7 @@ function crearFila(itemProducto) {
   <td>${itemProducto.url}</td>
   <td>
     <button class="btn btn-warning" onclick="prepararEdicionProducto(${itemProducto.codigo})">Editar</button>
-    <button class="btn btn-danger">Borrar</button>
+    <button class="btn btn-danger" onclick="borrarProducto(${itemProducto.codigo})">Borrar</button>
   </td>
 </tr>`;
 }
@@ -135,30 +141,52 @@ window.prepararEdicionProducto = (codigo) => {
 };
 
 function actualizarProducto() {
-  console.log(codigo.value);
-  console.log("Acá tengo que mofificar los productos");
-  //buscar el indice del objeto con el codigo indicado
-  let indiceProducto = productos.findIndex((itemProducto) => {
-    return itemProducto.codigo == codigo.value;
-  });
-  //console.log(indiceProducto);
-  //console.log(productos[indiceProducto].nombreProducto);
-  //actualizar los valores del objeto encontrado dentro del array
-  productos[indiceProducto].nombreProducto =
-    document.querySelector("#producto").value;
-  productos[indiceProducto].descripcion =
-    document.querySelector("#descripcion").value;
-  productos[indiceProducto].cantidad =
-    document.querySelector("#cantidad").value;
-  productos[indiceProducto].url = document.querySelector("#url").value;
+  //console.log(codigo.value);
+  //console.log("Acá tengo que mofificar los productos");
+  Swal.fire({
+    title: "¿Está seguro que desea editar el producto?",
+    text: "No puede revertir este proceso",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, deseo editarlo.",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //acá es donde procederemos a editar
+      //buscar el indice del objeto con el codigo indicado
+      let indiceProducto = productos.findIndex((itemProducto) => {
+        return itemProducto.codigo == codigo.value;
+      });
+      //console.log(indiceProducto);
+      //console.log(productos[indiceProducto].nombreProducto);
+      //actualizar los valores del objeto encontrado dentro del array
+      productos[indiceProducto].nombreProducto =
+        document.querySelector("#producto").value;
+      productos[indiceProducto].descripcion =
+        document.querySelector("#descripcion").value;
+      productos[indiceProducto].cantidad =
+        document.querySelector("#cantidad").value;
+      productos[indiceProducto].url = document.querySelector("#url").value;
 
-  console.log(productos[indiceProducto]);
-  //actualizar localStorage
-  localStorage.setItem("productosKey", JSON.stringify(productos));
-  //actualizar la tabla
-  borrarFilas();
-  productos.forEach((itemProducto) => {
-    crearFila(itemProducto);
+      console.log(productos[indiceProducto]);
+      //actualizar localStorage
+      localStorage.setItem("productosKey", JSON.stringify(productos));
+      //actualizar la tabla
+      borrarFilas();
+      productos.forEach((itemProducto) => {
+        crearFila(itemProducto);
+      });
+      //limpiar el formulario
+      limpiarFormulario();
+      //mostrar un mensaje que el producto fue editado
+      Swal.fire(
+        "Producto editado!",
+        "Su producto fue editado con éxito",
+        "success"
+      );
+    }
   });
 }
 
@@ -166,4 +194,41 @@ function borrarFilas() {
   //traigo el nodo padre que sería el tbody
   let tabla = document.querySelector("#tablaProductos");
   tabla.innerHTML = "";
+}
+
+window.borrarProducto = (codigo) => {
+  //console.log(codigo);
+  Swal.fire({
+    title: '¿Está seguro que desea eliminar el producto?',
+    text: "Este proceso no puede revertirse",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, deseo eliminarlo',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //acá agrego el código si quiero borrar
+      //op1 usar splice(indice, 1), para obtener el indice puedo usar findindex
+      //op2
+      let _productos = productos.filter((itemProducto) => {return itemProducto.codigo != codigo})
+      console.log(_productos);
+      //actualizar el arreglo y el localStorage
+      productos = _productos;
+      localStorage.setItem('productosKey', JSON.stringify(productos));
+      //borramos la tabla
+      borrarFilas();
+      //vuelvo a dibujar la tabla
+      productos.forEach((itemProducto) => {
+        crearFila(itemProducto);
+      });
+      //muestro el mensaje
+      Swal.fire(
+        'Producto eliminado',
+        'El producto fue eliminado con éxito.',
+        'success'
+      )
+    }
+  })
 }
