@@ -122,6 +122,10 @@ function limpiarFormulario() {
   formulario.reset();
   //limpiar las clases de cada elemento del form
   codigo.className = "form-control";
+  producto.className = "form-control";
+  descripcion.className = "form-control";
+  cantidad.className = "form-control";
+  url.className = "form-control";
   //terminar de limpiar los inputs
   productoExistente = false;
 }
